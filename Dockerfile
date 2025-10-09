@@ -8,7 +8,8 @@ ARG PLANTUML_VERSION=v1.2024.6
 ARG PLANTUML_CHECKSUM=3e944755cbed59e1ed9332691d92294bef7bbcda
 RUN curl -o plantuml.jar -L https://github.com/plantuml/plantuml/releases/download/v${PLANTUML_VERSION}/plantuml-${PLANTUML_VERSION}.jar && echo "${PLANTUML_CHECKSUM} plantuml.jar" | sha1sum -c - && mv plantuml.jar /opt/plantuml.jar
 
-RUN pip install --upgrade pip && pip install mkdocs-techdocs-core==1.5.4
+COPY requirements.txt .
+RUN pip install --upgrade pip && pip install 
 
 # Create script to call plantuml.jar from a location in path
 #   When adding TechDocs to the Backstage Backend container, avoid this
