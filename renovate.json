@@ -14,7 +14,7 @@
     {
       "fileMatch": ["^Dockerfile$"],
       "matchStrings": [
-        "# renovate: datasource=(?<datasource>.*?) ( extractVersion=(?<extractVersion>.*?))?\\s+ARG PLANTUML_VERSION=(?<currentValue>.*)\\s+ARG PLANTUML_CHECKSUM=(?<currentDigest>.*?)\\s"
+        "# renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?) (extractVersion=(?<extractVersion>.*?))?\\s+ARG PLANTUML_VERSION=(?<currentValue>.*)\\s+ARG PLANTUML_CHECKSUM=(?<currentDigest>.*?)\\s"
       ],
       "datasourceTemplate": "github-releases",
       "versioningTemplate": "semver-coerced"
