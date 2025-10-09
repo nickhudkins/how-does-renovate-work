@@ -1,4 +1,4 @@
-FROM python:3.12-alpine
+FROM python:3.12-alpine@sha256:efcdfa6a6b2fd2afb9c7dfa9a5b288a6f68338b5cfdebe6b637d986067d85757
 
 RUN apk update && apk --no-cache add gcc musl-dev openjdk17-jdk curl graphviz ttf-dejavu fontconfig
 
