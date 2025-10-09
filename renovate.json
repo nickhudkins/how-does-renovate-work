@@ -1,18 +1,25 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:best-practices"],
-  "labels": ["dependencies"],
+  "extends": [
+    "config:best-practices"
+  ],
+  "labels": [
+    "dependencies"
+  ],
   "enabledManagers": [
     "dockerfile",
     "pip_requirements",
-    "regex"
+    "custom.regex"
   ],
   "dockerfile": {
     "enabled": true
   },
-    "regexManagers": [
+  "customManagers": [
     {
-      "fileMatch": ["^Dockerfile$"],
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^Dockerfile$/"
+      ],
       "matchStrings": [
         "# renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?) (extractVersion=(?<extractVersion>.*?))?\\s+ARG PLANTUML_VERSION=(?<currentValue>.*)\\s+ARG PLANTUML_CHECKSUM=(?<currentDigest>.*?)\\s"
       ],
@@ -23,25 +30,42 @@
   "packageRules": [
     {
       "description": "Automerge minor and patch updates for pip deps",
-      "matchManagers": ["dockerfile"],
-      "matchDatasources": ["pypi", "github-releases"],
-      "matchUpdateTypes": ["minor", "patch"],
-      "addLabels": ["{{ updateType }}"],
+      "matchManagers": [
+        "dockerfile"
+      ],
+      "matchDatasources": [
+        "pypi",
+        "github-releases"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "addLabels": [
+        "{{ updateType }}"
+      ],
       "automerge": true,
       "automergeType": "pr"
     },
     {
       "description": "Separate major updates - require manual review",
-      "matchUpdateTypes": ["major"],
+      "matchUpdateTypes": [
+        "major"
+      ],
       "automerge": false,
-      "labels": ["major-update", "dependencies"]
+      "labels": [
+        "major-update",
+        "dependencies"
+      ]
     }
   ],
   "separateMajorMinor": true,
   "separateMinorPatch": false,
   "osvVulnerabilityAlerts": true,
   "vulnerabilityAlerts": {
-    "addLabels": ["security"],
+    "addLabels": [
+      "security"
+    ],
     "enabled": true
   }
 }
