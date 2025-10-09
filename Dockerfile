@@ -3,10 +3,10 @@ FROM python:3.12-alpine
 RUN apk update && apk --no-cache add gcc musl-dev openjdk17-jdk curl graphviz ttf-dejavu fontconfig
 
 # Download plantuml file, Validate checksum & Move plantuml file
-# renovate: datasource=github-releases depName=plantuml/plantuml
-ARG PLANTUML_VERSION=v1.2024.6
+# renovate: datasource=github-releases depName=plantuml/plantuml extractVersion=^v(?<version>.*)$
+ARG PLANTUML_VERSION=1.2024.6
 ARG PLANTUML_CHECKSUM=3e944755cbed59e1ed9332691d92294bef7bbcda
-RUN curl -o plantuml.jar -L https://github.com/plantuml/plantuml/releases/download/v${PLANTUML_VERSION}/plantuml-${PLANTUML_VERSION}.jar && echo "${PLANTUML_CHECKSUM} plantuml.jar" | sha1sum -c - && mv plantuml.jar /opt/plantuml.jar
+RUN curl -o plantuml.jar -L https://github.com/plantuml/plantuml/releases/download/v${PLANTUML_VERSION}/plantuml-v${PLANTUML_VERSION}.jar && echo "${PLANTUML_CHECKSUM} plantuml.jar" | sha1sum -c - && mv plantuml.jar /opt/plantuml.jar
 
 COPY requirements.txt .
 RUN pip install --upgrade pip && pip install 
